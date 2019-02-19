@@ -176,7 +176,7 @@ using namespace std;
 
 class Solution{
 public:
-	int Themaxsum(vector<int> array){
+	/*int Themaxsum(vector<int> array){
 		if (array.empty()){
 			return 0;
 		}
@@ -198,13 +198,23 @@ public:
 			j++;
 		}
 		return sum;
+	}*/
+	int FindGreatestSumOfSubArray(vector<int> array) {
+		if (array.empty()) return 0;
+		int sum = array[0], tempsum = array[0]; //注意初始值 不能设为0 防止只有负数
+		for (int i = 1; i < array.size(); i++) //从1开始 因为0的情况在初始化时完成了
+		{
+			tempsum = (tempsum < 0) ? array[i] : tempsum + array[i];
+			sum = (tempsum > sum) ? tempsum : sum;
+		}
+		return sum;
 	}
 };
 
 int main(){
 	vector<int> array = { -1, 2, 4, -5, 5, 15, 6 };
 	Solution s;
-	cout << s.Themaxsum(array);
+	cout << s.FindGreatestSumOfSubArray(array);
 	system("pause");
 	return 0;
 }
